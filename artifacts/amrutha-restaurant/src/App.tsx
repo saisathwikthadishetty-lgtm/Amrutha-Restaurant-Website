@@ -14,9 +14,17 @@ const links = [
   { label: 'About', href: '#about' },
   { label: 'Menu', href: '#menu' },
   { label: 'Services', href: '#services' },
+  { label: 'Demo ratings', href: '#reviews' },
   { label: 'Location', href: '#location' },
   { label: 'FAQs', href: '#faqs' },
 ];
+
+const demoRatings = [
+  { account: '@sample_guest_01', score: 5 },
+  { account: '@diner_demo_14', score: 4 },
+  { account: '@table_sample_27', score: 5 },
+  { account: '@guest_demo_08', score: 4 },
+] as const;
 
 const orderUrl =
   'https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFuamdyM2hoYxgBOgMI8A0%3D&hl=en-IN&gl=in&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=1MLJas27JLOfhvcPoqiq2QM&ei=1MLJas27JLOfhvcPoqiq2QM&fo_s=OA&opi=79508299&orderType=1&ebb=1&cs=0&foub=mcpp';
@@ -300,6 +308,63 @@ function App() {
                 View menu &amp; order online <ArrowUpRight size={16} />
               </a>
             </div>
+          </div>
+        </section>
+
+        <section
+          id="reviews"
+          aria-labelledby="reviews-heading"
+          className="bg-[#e9dfce] px-5 py-20 sm:px-8 sm:py-28 lg:px-14"
+        >
+          <div className="mx-auto max-w-[1240px]">
+            <div className="flex flex-col justify-between gap-7 md:flex-row md:items-end">
+              <div>
+                <p className="eyebrow mb-5 flex items-center gap-3 text-[#a8753f]">
+                  <span className="h-px w-8 bg-[#a8753f]" />
+                  Demo content · not real reviews
+                </p>
+                <h2
+                  id="reviews-heading"
+                  className="display-font text-4xl font-medium leading-[1.08] tracking-[-.045em] sm:text-6xl"
+                >
+                  Sample guest <span className="italic text-[#a8753f]">ratings.</span>
+                </h2>
+              </div>
+              <p className="max-w-[390px] text-sm leading-7 text-[#29483b]/70">
+                These fictional accounts and scores are placeholders for the design. They are not customer feedback or ratings for Amrutha.
+              </p>
+            </div>
+
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {demoRatings.map(({ account, score }) => (
+                <li key={account}>
+                  <article className="h-full rounded-2xl border border-[#29483b]/15 bg-[#f5f2e9] p-6">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="eyebrow text-[10px] text-[#a8753f]">Fictional sample account</p>
+                        <h3 className="mt-2 break-all text-sm font-semibold text-[#29483b]">{account}</h3>
+                      </div>
+                      <span className="rounded-full border border-[#a8753f]/40 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[#8a6136]">
+                        Demo
+                      </span>
+                    </div>
+                    <div className="mt-6 flex items-center gap-3">
+                      <span aria-hidden="true" className="tracking-[.12em] text-[#a8753f]">
+                        {'★'.repeat(score)}{'☆'.repeat(5 - score)}
+                      </span>
+                      <span className="text-sm font-semibold tabular-nums text-[#29483b]">{score}.0 / 5</span>
+                    </div>
+                    <p className="mt-4 text-xs leading-5 text-[#29483b]/60">
+                      Sample score only · replace with a verified customer rating.
+                    </p>
+                  </article>
+                </li>
+              ))}
+            </ul>
+
+            <p role="note" className="mt-6 text-xs leading-5 text-[#29483b]/65">
+              All names and ratings above are fictional examples, not genuine accounts or reviews.
+            </p>
           </div>
         </section>
 
