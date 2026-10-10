@@ -14,7 +14,7 @@ const links = [
   { label: 'About', href: '#about' },
   { label: 'Menu', href: '#menu' },
   { label: 'Services', href: '#services' },
-  { label: 'Demo ratings', href: '#reviews' },
+  { label: 'Ratings', href: '#reviews' },
   { label: 'Location', href: '#location' },
   { label: 'FAQs', href: '#faqs' },
 ];
@@ -321,13 +321,13 @@ function App() {
               <div>
                 <p className="eyebrow mb-5 flex items-center gap-3 text-[#a8753f]">
                   <span className="h-px w-8 bg-[#a8753f]" />
-                  Demo content · not real reviews
+                  Fictional examples · not real reviews
                 </p>
                 <h2
                   id="reviews-heading"
                   className="display-font text-4xl font-medium leading-[1.08] tracking-[-.045em] sm:text-6xl"
                 >
-                  Sample guest <span className="italic text-[#a8753f]">ratings.</span>
+                  <span className="italic text-[#a8753f]">Ratings.</span>
                 </h2>
               </div>
               <p className="max-w-[390px] text-sm leading-7 text-[#29483b]/70">
