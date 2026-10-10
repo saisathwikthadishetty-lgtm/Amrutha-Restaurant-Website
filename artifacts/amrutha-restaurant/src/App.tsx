@@ -1,15 +1,29 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowUpRight,
+  ChevronDown,
+  MapPin,
+  Menu,
+  X,
+} from 'lucide-react';
+import { menuSections, sampleMenuItems } from './data/menu';
 
 const links = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
+  { label: 'Menu', href: '#menu' },
   { label: 'Services', href: '#services' },
+  { label: 'Location', href: '#location' },
   { label: 'FAQs', href: '#faqs' },
 ];
 
 const orderUrl =
   'https://www.google.com/searchviewer/42?cvd=CLw_EicKJeICIjIgEhkiF9LX29IPEQoNL2cvMTFuamdyM2hoYxgBOgMI8A0%3D&hl=en-IN&gl=in&fo_m=MfohQo559jFvMUOzJVpjPL1YMfZ3bInYwBDuMfaXTPp5KXh-&utm_source=tactile&gei=1MLJas27JLOfhvcPoqiq2QM&ei=1MLJas27JLOfhvcPoqiq2QM&fo_s=OA&opi=79508299&orderType=1&ebb=1&cs=0&foub=mcpp';
+const locationUrl =
+  'https://www.google.com/maps/search/?api=1&query=18.0253693%2C79.5464297';
+const zomatoMenuUrl =
+  'https://www.zomato.com/warangal/amrutha-multi-cuisine-family-restaurant-hanamakonda/order?v=o2';
 
 const questions = [
   {
@@ -25,12 +39,12 @@ const questions = [
   {
     question: 'Where can I see the menu?',
     answer:
-      'Check the restaurant’s online ordering page for the current menu and fees before placing an order.',
+      'Browse the menu and listed prices on this page. For current availability and ordering fees, check the restaurant’s online ordering page.',
   },
   {
     question: 'Where can I find the restaurant, or when is it open?',
     answer:
-      'Location and opening hours have not been confirmed for this website. Please check directly with Amrutha before visiting.',
+      'Amrutha is at 2-12-412/1, Vidyapuranyapuri, near KU Second Gate, Hanamkonda, Warangal, Telangana 506001. Opening hours are not listed here.',
   },
   {
     question: 'Can you help with dietary requirements?',
@@ -165,6 +179,95 @@ function App() {
           </div>
         </section>
 
+        <section id="menu" className="bg-[#eae5d8] px-5 py-24 sm:px-8 sm:py-32 lg:px-14">
+          <div className="mx-auto max-w-[1240px]">
+            <div className="mx-auto max-w-[760px] text-center">
+              <p className="eyebrow mb-5 flex items-center justify-center gap-3 text-[#a8753f]">
+                <span className="h-px w-8 bg-[#a8753f]" />
+                From our kitchen
+                <span className="h-px w-8 bg-[#a8753f]" />
+              </p>
+              <h2 className="display-font text-4xl font-medium leading-[1.1] tracking-[-.045em] sm:text-6xl">
+                The <span className="italic text-[#a8753f]">menu.</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-[560px] text-sm leading-7 text-[#29483b]/70 sm:text-base">
+                Browse Amrutha’s multi-cuisine selection, with every listed price shown in Indian rupees.
+              </p>
+            </div>
+
+            <div className="relative mt-12 overflow-hidden border border-[#a8753f]/45 bg-[#fbf8f0] p-5 shadow-[0_24px_70px_-42px_rgba(41,72,59,.55)] sm:p-9 lg:p-12">
+              <div className="pointer-events-none absolute inset-2 border border-[#a8753f]/25 sm:inset-4" aria-hidden="true" />
+              <div className="relative">
+                <header className="border-b border-[#a8753f]/35 pb-7 text-center sm:pb-9">
+                  <p className="text-[9px] font-bold uppercase tracking-[.27em] text-[#a8753f] sm:text-[10px]">
+                    Amrutha · Multi Cuisine · Family Restaurant
+                  </p>
+                  <h3 className="display-font mt-3 text-4xl font-medium tracking-[-.04em] text-[#29483b] sm:text-5xl">
+                    Menu
+                  </h3>
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[.16em] text-[#29483b]/55">
+                    Good food for the whole table
+                  </p>
+                  <span className="mx-auto mt-5 block h-px w-16 bg-[#a8753f]" />
+                </header>
+
+                <div className="mt-8 grid gap-x-12 gap-y-8 md:grid-cols-2">
+                  {menuSections.map((section) => {
+                    const sectionId = `menu-${section.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+                    return (
+                      <section key={section.title} aria-labelledby={sectionId}>
+                        <h4 id={sectionId} className="display-font border-b border-[#a8753f]/35 pb-2 text-xl font-semibold text-[#29483b] sm:text-2xl">
+                          {section.title}
+                        </h4>
+                        <ul className="mt-2">
+                          {section.items.map(([name, price]) => (
+                            <li key={name} className="flex items-baseline justify-between gap-4 border-b border-dotted border-[#29483b]/20 py-2.5 last:border-0">
+                              <span className="min-w-0 text-[13px] leading-5 text-[#29483b]/85 sm:text-sm">{name}</span>
+                              <span className="shrink-0 text-sm font-semibold tabular-nums text-[#29483b]">₹{price.toLocaleString('en-IN')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </section>
+                    );
+                  })}
+                </div>
+
+                <section aria-labelledby="sample-menu-heading" className="mt-10 border border-dashed border-[#a8753f]/50 bg-[#f4eddd] p-5 sm:p-7">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-[9px] font-bold uppercase tracking-[.2em] text-[#a8753f]">Suggested additions</p>
+                      <h4 id="sample-menu-heading" className="display-font mt-1 text-2xl text-[#29483b] sm:text-3xl">Popular dish ideas</h4>
+                    </div>
+                    <span className="inline-flex w-fit rounded-full border border-[#a8753f]/45 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.14em] text-[#8a5b2c]">
+                      Sample prices · not verified
+                    </span>
+                  </div>
+                  <p className="mt-3 max-w-[760px] text-xs leading-5 text-[#29483b]/65">
+                    Added as requested. These dishes and randomly selected prices are illustrative only; they are not confirmed offerings or prices from the restaurant.
+                  </p>
+                  <ul className="mt-4 grid gap-x-8 sm:grid-cols-2">
+                    {sampleMenuItems.map(([name, price]) => (
+                      <li key={name} className="flex items-baseline justify-between gap-4 border-b border-dotted border-[#29483b]/20 py-2.5">
+                        <span className="min-w-0 text-[13px] leading-5 text-[#29483b]/85 sm:text-sm">{name}</span>
+                        <span className="shrink-0 text-sm font-semibold tabular-nums text-[#29483b]">₹{price.toLocaleString('en-IN')}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                <footer className="mt-9 flex flex-col gap-3 border-t border-[#a8753f]/30 pt-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+                  <p className="max-w-[650px] text-xs leading-5 text-[#29483b]/60">
+                    Online menu prices are transcribed from the restaurant’s Zomato listing and may change. Check current availability and fees before ordering.
+                  </p>
+                  <a href={zomatoMenuUrl} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-semibold text-[#29483b] transition-colors hover:text-[#a8753f]">
+                    Check online menu <ArrowUpRight size={15} />
+                  </a>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="services" className="bg-[#29483b] px-5 py-24 text-[#f5f2e9] sm:px-8 sm:py-32 lg:px-14">
           <div className="mx-auto max-w-[1240px]">
             <div className="flex flex-col justify-between gap-7 md:flex-row md:items-end">
@@ -210,6 +313,56 @@ function App() {
               <p className="mt-5 max-w-[465px] text-sm leading-7 text-[#29483b]/70">Bring the family, bring your appetite, bring your own idea of a good meal. Amrutha is here for the choosing-together part.</p>
             </div>
             <a href="#faqs" className="inline-flex shrink-0 items-center gap-3 rounded-full border border-[#29483b]/30 px-6 py-4 text-sm font-semibold transition-all hover:bg-[#29483b] hover:text-[#f5f2e9]">A few useful details <ArrowUpRight size={16} /></a>
+          </div>
+        </section>
+
+        <section
+          id="location"
+          className="bg-[#eae5d8] px-5 py-20 sm:px-8 sm:py-28 lg:px-14"
+        >
+          <div className="mx-auto grid max-w-[1240px] gap-10 md:grid-cols-[.8fr_1.2fr] md:items-center">
+            <div>
+              <p className="eyebrow mb-5 flex items-center gap-3 text-[#a8753f]">
+                <span className="h-px w-8 bg-[#a8753f]" />
+                Find your way
+              </p>
+              <h2 className="display-font text-4xl font-medium leading-[1.1] tracking-[-.045em] sm:text-6xl">
+                Find <span className="italic text-[#a8753f]">Amrutha.</span>
+              </h2>
+              <p className="mt-5 max-w-[390px] text-sm leading-7 text-[#29483b]/75">
+                2-12-412/1, Vidyapuranyapuri, near KU Second Gate, Hanamkonda, Warangal, Telangana 506001.
+              </p>
+              <p className="mt-4 text-xs font-medium tabular-nums text-[#29483b]/55">
+                18.0253693, 79.5464297
+              </p>
+              <a
+                href={locationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#29483b] px-6 py-4 text-sm font-semibold text-[#f5f2e9] transition-colors hover:bg-[#bb8750] hover:text-[#29483b]"
+              >
+                Open in Google Maps <MapPin size={16} />
+              </a>
+            </div>
+            <div className="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-2xl bg-[#29483b] p-7 text-[#f5f2e9] sm:min-h-[410px] sm:p-10">
+              <span className="pointer-events-none absolute -right-20 -top-24 h-[340px] w-[340px] rounded-full border border-[#f5f2e9]/15" />
+              <span className="pointer-events-none absolute -right-6 -top-10 h-[250px] w-[250px] rounded-full border border-[#f5f2e9]/10" />
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#f5f2e9]/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.17em] text-[#d8a15f]">
+                  <MapPin size={14} /> Visit Amrutha
+                </span>
+                <h3 className="display-font mt-8 max-w-[400px] text-3xl leading-tight sm:text-4xl">
+                  Amrutha Multi Cuisine Family Restaurant
+                </h3>
+                <p className="mt-4 max-w-[430px] text-sm leading-6 text-[#f5f2e9]/75">
+                  2-12-412/1, Vidyapuranyapuri, near KU Second Gate, Hanamkonda, Warangal, Telangana 506001
+                </p>
+              </div>
+              <div className="relative mt-10 border-t border-[#f5f2e9]/20 pt-5">
+                <p className="text-xs text-[#f5f2e9]/60">Map coordinates</p>
+                <p className="mt-2 font-mono text-sm tracking-wide">18.0253693, 79.5464297</p>
+              </div>
+            </div>
           </div>
         </section>
 
